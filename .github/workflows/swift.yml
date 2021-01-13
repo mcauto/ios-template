@@ -8,9 +8,8 @@ on:
 
 jobs:
   build:
-
-    runs-on: macos-latest
-
+    # https://github.com/actions/virtual-environments
+    runs-on: macos-11.0
     steps:
     - uses: actions/checkout@v2
     - name: Swiftlint
