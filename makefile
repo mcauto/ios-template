@@ -13,8 +13,7 @@ PROJECT_NAME = template
 WORKSPACE = $(shell find . -name "*.xcworkspace")
 EMULATOR = iPhone 12 mini
 
-OS_VERSION = $(shell cat ${PROJECT_NAME}.xcodeproj/project.pbxproj | grep IPHONEOS_DEPLOYMENT_TARGET | head -1 | tr -d ' ' | tr -d '\t' | tr -d ';' | cut -f2 -d"=")
-
+OS_VERSION = $(shell xcodebuild -showsdks | egrep "iOS (\d)+.(\d)+" | head -1 | cut -f2 -d" ")
 build:
 ifndef XCPRETTY
 	$(error xcpretty를 설치하세요)
@@ -44,3 +43,7 @@ endif
 	CODE_SIGNING_REQUIRED=NO \
 	ONLY_ACTIVE_ARCH=NO | xcpretty
 .PHONY: test
+
+release:
+	sed -i ".bak" "s/MARKETING_VERSION = .*/MARKETING_VERSION = $(shell npx next-standard-version);/g" template.xcodeproj/project.pbxproj
+.PHONY: release
