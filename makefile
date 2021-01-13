@@ -12,7 +12,7 @@ XCPRETTY = $(shell command -v xcpretty)
 PROJECT_NAME = template
 WORKSPACE = $(shell find . -name "*.xcworkspace")
 EMULATOR = iPhone 12 mini
-OS_VERSION = 14.3
+OS_VERSION = 14.2
 
 build:
 ifndef XCPRETTY
