@@ -25,15 +25,17 @@ jobs:
           git config --local user.name "GitHub Action"
           export VERSION=$(npx next-standard-version)
           export DESCRIPTION=$(npx standard-version --dry-run --silent | grep -v yarn | grep -v Done | grep -v "\-\-\-" | grep -v standard-version)
-          echo >>$GITHUB_ENV DESCRIPTION=$DESCRIPTION
-          echo >>$GITHUB_ENV VERSION=$VERSION
+          echo "DESCRIPTION<<EOF" >> $GITHUB_ENV
+          echo "$DESCRIPTION" >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+          echo "VERSION=$VERSION" >> $GITHUB_ENV 
           make release
           git add template.xcodeproj/project.pbxproj
           git commit --no-verify -m "chore(release): ${VERSION}"
           npx standard-version
           git tag -d v$VERSION
           git reset --soft HEAD~~ && git commit --no-verify --no-edit -m "chore(release): ${VERSION}"
-          git tag v$VERSION     
+          git tag v$VERSION
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
