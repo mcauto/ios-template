@@ -17,9 +17,9 @@
   },
   "homepage": "https://github.com/mcauto/template#readme",
   "devDependencies": {
-    "@commitlint/cli": "^11.0.0",
+    "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^11.0.0",
-    "husky": "^4.3.7",
+    "husky": "^8.0.3",
     "next-standard-version": "^1.0.1",
     "standard-version": "^9.1.0"
   },
